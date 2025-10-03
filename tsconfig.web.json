@@ -1,0 +1,36 @@
+{
+  // Extends a base TypeScript configuration tailored for Electron + web (renderer) projects
+  "extends": "@electron-toolkit/tsconfig/tsconfig.web.json", //If we want to override any of these settings, we can do so here
+
+  // Files and folders to include in the compilation
+  "include": [
+    // Environment type declarations for Vite/React
+    "src/renderer/src/env.d.ts",
+    // All source files in the renderer's source directory
+    "src/renderer/src/**/*",
+    // All TypeScript React component files
+    "src/renderer/src/**/*.tsx",
+    // Declaration files for preload scripts
+    "src/preload/*.d.ts"
+  ],
+
+  // TypeScript compiler options for this project
+  "compilerOptions": {
+    // Enables project references — useful for multi-project setups like Electron (main + renderer)
+    "composite": true,
+
+    // Uses the modern JSX transform from React 17+ (no need to import React explicitly)
+    "jsx": "react-jsx",
+
+    // Sets the base URL for module resolution (used with paths)
+    "baseUrl": ".",
+
+    // Sets up path aliases for easier imports
+    "paths": {
+      // Allows importing from '@renderer/*' instead of relative paths like '../../../'
+      "@/*": [
+        "src/renderer/src/*"
+      ]
+    }
+  }
+}

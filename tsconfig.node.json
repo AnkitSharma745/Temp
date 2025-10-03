@@ -1,0 +1,22 @@
+{
+  // Inherit base TypeScript configuration designed for Node.js (which is what Electron's main and preload use)
+  "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
+
+  // Files to include in the TypeScript project
+  "include": [
+    // Electron Vite configuration files (like electron.vite.config.ts)
+    "electron.vite.config.*",
+    // All TypeScript files in the main process folder
+    "src/main/**/*",
+    // All TypeScript files in the preload folder
+    "src/preload/**/*"
+  ],
+
+  "compilerOptions": {
+    // Enables support for project references (important in multi-config setups like Electron + React)
+    "composite": true,
+
+    // Adds custom type definitions from electron-vite (e.g., Node-style import meta envs)
+    "types": ["electron-vite/node"]
+  }
+}
