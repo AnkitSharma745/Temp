@@ -33,15 +33,15 @@ export default defineConfig({
     plugins: [react(), eslint()],
     server: {
       // Port to serve the development server (used in dev mode only)
-      port: 5174,
+      port: 5174
 
       // Use HTTPS with a local self-signed certificate (for development)
-      https: {
-        // Private key for the local HTTPS server
-        key: resolve('certificates/vendingmachine.key'),
-        // Certificate file for the local HTTPS server
-        cert: resolve('certificates/vendingmachine.cer')
-      }
+      // https: {
+      //   // Private key for the local HTTPS server
+      //   key: resolve('certificates/vendingmachine.key'),
+      //   // Certificate file for the local HTTPS server
+      //   cert: resolve('certificates/vendingmachine.cer')
+      // }
     }
   }
 });
