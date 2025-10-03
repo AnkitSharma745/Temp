@@ -18,7 +18,8 @@
     "build:unpack": "npm run build && electron-builder --dir",
     "build:win": "npm run build && electron-builder --win",
     "build:mac": "electron-vite build && electron-builder --mac",
-    "build:linux": "electron-vite build && electron-builder --linux"
+    "build:linux": "electron-vite build && electron-builder --linux",
+    "release": "npm run build:win && electron-builder --publish always"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^3.0.1",
@@ -44,7 +45,7 @@
     "yup": "^1.6.1"
   },
   "build": {
-    "appId": "Generic-UI",
+    "appId": "com.ogmento.genericui",
     "productName": "Generic UI",
     "directories": {
       "buildResources": "resources",
@@ -65,7 +66,14 @@
       "perMachine": true,
       "allowToChangeInstallationDirectory": false,
       "runAfterFinish": true
-    }
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "AnkitSharma745",
+        "repo": "Temp"
+      }
+    ]
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "^3.0.0",
