@@ -1,4 +1,5 @@
 import { app, shell, BrowserWindow } from 'electron';
+import { autoUpdater } from 'electron-updater';
 import { join } from 'path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 app.commandLine.appendSwitch('ignore-certificate-errors');
@@ -38,6 +39,15 @@ app.whenReady().then(() => {
 
   createWindow();
 
+  autoUpdater.autoDownload = true;
+  autoUpdater.autoInstallOnAppQuit = true;
+  autoUpdater.checkForUpdatesAndNotify();
+
+  // OPTIONAL: auto restart app after update downloaded
+  autoUpdater.on('update-downloaded', () => {
+    autoUpdater.quitAndInstall(false, true);
+  });
+
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
@@ -48,4 +58,3 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 });
-
