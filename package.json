@@ -1,6 +1,6 @@
 {
   "name": "generic-ui",
-  "version": "1.0.0",
+  "version": "5.0.0",
   "description": "Kiosk E-Commerce App",
   "main": "./out/main/index.js",
   "author": "https://ogmento.io/",
