@@ -1,6 +1,7 @@
 import { app, shell, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import { join } from 'path';
+import log from 'electron-log';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
 app.commandLine.appendSwitch('ignore-certificate-errors');
 
@@ -31,6 +32,7 @@ function createWindow(): void {
 }
 
 app.whenReady().then(() => {
+  // Other app init logic...
   electronApp.setAppUserModelId('Generic-UI');
 
   app.on('browser-window-created', (_, window) => {
@@ -38,13 +40,25 @@ app.whenReady().then(() => {
   });
 
   createWindow();
+  // Auto updater setup
+  autoUpdater.logger = log;
+  log.transports.file.level = 'info';
 
   autoUpdater.autoDownload = true;
   autoUpdater.autoInstallOnAppQuit = true;
+
+  // Optional but recommended for consistency
+  autoUpdater.setFeedURL({
+    provider: 'github',
+    owner: 'AnkitSharma745',
+    repo: 'Temp'
+  });
+
+  log.info('Checking for updates...');
   autoUpdater.checkForUpdatesAndNotify();
 
-  // OPTIONAL: auto restart app after update downloaded
   autoUpdater.on('update-downloaded', () => {
+    log.info('Update downloaded, installing...');
     autoUpdater.quitAndInstall(false, true);
   });
 
